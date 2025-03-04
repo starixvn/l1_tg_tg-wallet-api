@@ -31,7 +31,7 @@ namespace TGWallet.API.Features.Wallets
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<PlayerBalanceRequest>> GetBalance([FromBody] PlayerBalanceRequest request)
+        public async Task<ActionResult<PlayerBalanceResponse>> GetBalance([FromBody] PlayerBalanceRequest request)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace TGWallet.API.Features.Wallets
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<DeductBalanceRequest>> PlaceBet([FromBody] DeductBalanceRequest request)
+        public async Task<ActionResult<DeductBalanceResponse>> PlaceBet([FromBody] DeductBalanceRequest request)
         {
             try
             {

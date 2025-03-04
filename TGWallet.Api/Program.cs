@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using TGWallet.API.Features.Wallets;
@@ -68,7 +69,9 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var environment = builder.Configuration.GetSection("Environment").Get<string>();
+var isLocal = !string.IsNullOrEmpty(environment) && environment.Contains("LOCAL");
+if (isLocal || app.Environment.IsDevelopment())
 {
     app.UseSwagger();
 
