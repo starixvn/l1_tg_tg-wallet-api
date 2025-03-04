@@ -4,6 +4,7 @@ using TGWallet.API.Shared.Configuration;
 using TGWallet.API.Shared.MongoDB;
 using TGWallet.API.Features.Wallets.Models;
 using Sentry;
+using TGWallet.API.Features.Wallets.Databases;
 
 namespace TGWallet.API.Features.Wallets
 {
@@ -22,23 +23,15 @@ namespace TGWallet.API.Features.Wallets
             _sentryHub = sentryHub;
         }
 
-        public async Task<Wallet> GetPlayerBalanceAsync(string operatorId, string playerId, string siteId)
+        public async Task<decimal> GetPlayerBalanceAsync(string playerId)
         {
             try
             {
-                return await _playerWallets.Find(x => 
-                    x.PlayerId == playerId)
-                .FirstOrDefaultAsync();
+                return 1000;
             }
             catch (Exception ex)
             {
-                _sentryHub.CaptureException(ex, scope =>
-                {
-                    scope.SetExtra("operatorId", operatorId);
-                    scope.SetExtra("playerId", playerId);
-                    scope.SetExtra("siteId", siteId);
-                });
-                throw;
+                return 0;
             }
         }
     }

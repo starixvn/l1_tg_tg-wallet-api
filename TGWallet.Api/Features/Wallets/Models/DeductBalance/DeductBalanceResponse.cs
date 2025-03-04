@@ -2,6 +2,7 @@
 {
     public class DeductBalanceResponse : BaseResponse
     {
-        public decimal Amount { get; set; }
+        public Guid TxId { get; set; }
+        public decimal Balance { get; set; }
     }
 }

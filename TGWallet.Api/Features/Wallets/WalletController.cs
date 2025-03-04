@@ -31,10 +31,17 @@ namespace TGWallet.API.Features.Wallets
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetBalance([FromBody] PlayerBalanceRequest request)
+        public async Task<ActionResult<PlayerBalanceRequest>> GetBalance([FromBody] PlayerBalanceRequest request)
         {
             try
             {
+                return Ok(new PlayerBalanceResponse
+                {
+                    Balance = 2000,
+                    Message = string.Empty,
+                    StatusCode = "0",
+                });
+
                 var balance = await _playerService.GetPlayerBalanceAsync(
                     request.PlayerId);
 
@@ -60,6 +67,14 @@ namespace TGWallet.API.Features.Wallets
         {
             try
             {
+                return Ok(new DeductBalanceResponse
+                {
+                    Balance = 2000,
+                    Message = string.Empty,
+                    StatusCode = "0",
+                    TxId = new Guid()
+                });
+
                 var result = await _mediator.Send(new DeductBalanceCommand(request));
                 return Ok(result);
             }
@@ -78,6 +93,14 @@ namespace TGWallet.API.Features.Wallets
         {
             try
             {
+                return Ok(new AddBalanceResponse
+                {
+                    Balance = 2000,
+                    Message = string.Empty,
+                    StatusCode = "0",
+                    TxId = new Guid()
+                });
+
                 var result = await _mediator.Send(new AddBallanceCommand(request));
                 return Ok(result);
             }
