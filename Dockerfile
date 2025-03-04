@@ -8,7 +8,7 @@ USER app
 FROM --platform=$BUILDPLATFORM hub.lumigame.com/base/dotnet/core/sdk:9.0-alpine AS builder
 ARG configuration=Release
 WORKDIR /src
-COPY ["TGWallet.Api/TGWallet.Api.csproj", "TGPlayerApi/"]
+COPY ["TGWallet.Api/TGWallet.Api.csproj", "TGWallet.Api/"]
 RUN dotnet restore "TGWallet.Api/TGWallet.Api.csproj"
 COPY . .
 WORKDIR "/src/TGWallet.Api"
@@ -21,4 +21,4 @@ RUN dotnet publish "TGWallet.Api.csproj" -c $configuration -o /app/publish /p:Us
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "TGPlayerApi.dll"]
+ENTRYPOINT ["dotnet", "TGWallet.Api.dll"]
